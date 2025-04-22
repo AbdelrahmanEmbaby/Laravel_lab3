@@ -2,9 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
+/*
+    if the route is '/posts/{id}'
+    and the id is of type string other than 'create'
+    the user will be redirected to the fallback route
+*/
+
 Route::get('/posts', [App\Http\Controllers\PostsController::class, 'index'])->name('posts.index');
 
-Route::get('/posts/{id}', [App\Http\Controllers\PostsController::class, 'show'])->name('posts.show');
+Route::get('/posts/{id}', [App\Http\Controllers\PostsController::class, 'show'])
+    ->name('posts.show')
+    ->where('id', '[0-9]+');
 
 Route::get('/posts/create', [App\Http\Controllers\PostsController::class, 'create'])->name('posts.create');
 
