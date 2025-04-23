@@ -1,4 +1,9 @@
 @import 'tailwindcss';
+
+@plugin "daisyui" {
+    themes: light --default;
+}
+
 @source "../views";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

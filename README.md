@@ -1,9 +1,17 @@
-# Laravel Lab 1
+# Laravel Lab 2
 
 ## Installation
 
 ```git
-    git clone https://github.com/AbdelrahmanEmbaby/Laravel_Lab1.git
+    git clone https://github.com/AbdelrahmanEmbaby/Laravel_lab2.git
+```
+
+```composer
+    composer install
+```
+
+```npm
+    npm install
 ```
 
 ## Usage
@@ -19,4 +27,3 @@
         npm run dev
     ```
     In the second terminal
-"# Laravel_lab2" 
