@@ -27,3 +27,4 @@
         npm run dev
     ```
     In the second terminal
+"# Laravel_lab3" 
