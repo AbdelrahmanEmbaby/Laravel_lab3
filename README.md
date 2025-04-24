@@ -3,7 +3,7 @@
 ## Installation
 
 ```git
-    git clone https://github.com/AbdelrahmanEmbaby/Laravel_lab2.git
+    git clone https://github.com/AbdelrahmanEmbaby/Laravel_lab3.git
 ```
 
 ```composer
@@ -27,4 +27,3 @@
         npm run dev
     ```
     In the second terminal
-"# Laravel_lab3" 
