@@ -1,4 +1,4 @@
-# Laravel Lab 2
+# Laravel Lab 3
 
 ## Installation
 
