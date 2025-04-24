@@ -6,6 +6,10 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use App\Events\PostCreated;
+use App\Events\PostDeleted;
+use Illuminate\Support\Facades\Auth;
+
 class PostsController extends Controller
 {
     public function index()
@@ -17,7 +21,8 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show', ['post' => $post]);
+        $user = Auth::user();
+        return view('posts.show', ['post' => $post, 'user' => $user]);
     }
 
     public function create()
@@ -30,11 +35,12 @@ class PostsController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string',
-            'body' => 'required|string',
-            'user_id' => 'required|exists:users,id',
+            'body' => 'required|string'
         ]);
 
-        Post::create($validated);
+        $validated['user_id'] = Auth::user()->id;
+        $post = Post::create($validated);
+        event(new PostCreated($post));
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully');
     }
@@ -43,6 +49,9 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $users = User::all();
+        if ($post->user_id !== Auth::user()->id) {
+            return redirect()->route('posts.index')->with('error', 'You are not authorized to edit this post');
+        }
         return view('posts.edit', ['post' => $post, 'users' => $users]);
     }
 
@@ -65,6 +74,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->delete();
 
+        event(new PostDeleted($post));
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
 }
